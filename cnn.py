@@ -18,15 +18,6 @@ from keras.layers import Convolution2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
-import matplotlib.pylab as plt
-
-class AccuracyHistory(keras.callbacks.Callback):
-    def on_train_begin(self, logs={}):
-        self.acc = []
-
-    def on_epoch_end(self, batch, logs={}):
-        self.acc.append(logs.get('acc'))
-
 
 # Initialising the CNN
 classifier = Sequential()
@@ -72,14 +63,12 @@ test_set = test_datagen.flow_from_directory('dataset/test_set',
                                             batch_size = 32,
                                             class_mode = 'binary')
 
-history = AccuracyHistory()
 classifier.fit_generator(training_set,
                          steps_per_epoch = 250,
                          epochs = 50,
                          verbose = 1,
                          validation_data = test_set,
-                         validation_steps = 2000,
-                         callbacks=[history])
+                         validation_steps = 2000)
 
 # serialize model to JSON
 model_json = classifier.to_json()
@@ -89,7 +78,7 @@ with open("model.json", "w") as json_file:
 classifier.save_weights("model.h5")
 print("Saved model to disk")
 
-plt.plot(range(1, 51), history.acc)
-plt.xlabel('Epochs')
-plt.ylabel('Accuracy')
-plt.show()
+# plt.plot(range(1, 51), history.acc)
+# plt.xlabel('Epochs')
+# plt.ylabel('Accuracy')
+# plt.show()
