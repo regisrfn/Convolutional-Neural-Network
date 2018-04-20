@@ -54,7 +54,7 @@ train_datagen = ImageDataGenerator(rescale = 1./255,shear_range = 0.2,zoom_range
 
 training_set = train_datagen.flow_from_directory('dataset/training_set',target_size = (64,64),batch_size = 128,class_mode = 'binary')
 
-classifier.fit_generator(training_set,steps_per_epoch = 250,epochs = 1,verbose = 1)
+classifier.fit_generator(training_set,steps_per_epoch = 250,epochs = 20,verbose = 1)
 
 # serialize model to JSON
 model_json = classifier.to_json()
