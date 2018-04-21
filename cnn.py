@@ -56,7 +56,7 @@ from keras.preprocessing.image import ImageDataGenerator
 
 train_datagen = ImageDataGenerator(rescale = 1./255,shear_range = 0.2,zoom_range = 0.2,horizontal_flip = True)
 
-training_set = train_datagen.flow_from_directory('dataset/training_set',target_size = (64,64),batch_size = 128,class_mode = 'binary')
+training_set = train_datagen.flow_from_directory('Dataset',target_size = (64,64),batch_size = 128,class_mode = 'binary')
 
 classifier.fit_generator(training_set,steps_per_epoch = 250,epochs = 50,verbose = 1)
 
