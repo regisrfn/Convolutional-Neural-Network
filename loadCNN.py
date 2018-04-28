@@ -20,6 +20,6 @@ print("Loaded model from disk")
 
 # evaluate loaded model on test data
 # Compiling the CNN
-loaded_model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+loaded_model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
 score = loaded_model.evaluate_generator(test_set)
 print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
