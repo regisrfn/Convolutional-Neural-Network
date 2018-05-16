@@ -8,6 +8,7 @@ test_set = test_datagen.flow_from_directory('dataset/test_set',
                                             batch_size = 128,
                                             class_mode = 'categorical')
 
+y_test = test_set.classes
 
 # load json and create model
 json_file = open('model.json', 'r')
@@ -23,3 +24,8 @@ print("Loaded model from disk")
 loaded_model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
 score = loaded_model.evaluate_generator(test_set)
 print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
+
+# y_pred = loaded_model.predict_generator(test_set)
+# y_pred = y_pred.argmax(axis=1)
+# from sklearn.metrics import confusion_matrix
+# cm = confusion_matrix(y_test, y_pred, labels = [0,1])
